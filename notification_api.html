@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //it has 3 possible values: default, granted and denied
+        function showNotification()
+        {            
+            const notification=new Notification("New message from deepak!",{
+                body:"hey mate, how are you? Lets catch up soon?",
+                icon: 'Deepak_img.jpg',
+                data: 'Not possible! absolutely not possible'
+               
+            });
+           // notification.onclick=function(event)
+           /* {
+                event.preventDefault();
+                window.open('https://www.internshala.com');
+            }*/
+            setTimeout(notification.close.bind(notification),500);// closes notification after 1 sec
+        }
+        function notify()
+        {
+            console.log(Notification.permission);
+            var fruit1 = document.getElementById('cb1').checked;
+            var fruit2 = document.getElementById('cb2').checked;
+            var fruit3 = document.getElementById('cb3').checked;
+            
+            var flag=null;
+           
+            if(fruit1 || fruit2 || fruit3)
+            {
+            flag=1;
+            }
+            else{
+                alert(fruit1+" "+fruit2+" "+fruit3);
+            }
+        
+          //  alert(fruit1);
+         if(Notification.permission !=="denied")
+        {
+        Notification.requestPermission().then(permission=> {
+        if(Notification.permission ==="granted" && flag !=null)
+        {
+            showNotification();        
+        }
+                
+            })
+        }
+        else if(Notification.permission ==="default")
+        {
+            alert("notification allowed");
+           // showNotification();
+        }
+    }
+        
+       
+        
+        </script>
+</head>
+<body>
+    <form>
+    <input type="checkbox" id="cb1" name="fruit" value="Apple"> Apple<br>
+    <input type="checkbox" id="cb2" name="fruit" value="Orange"> Orange <br>
+    <input type="checkbox" id="cb3" name="fruit" value="Banana"> Banana <br>
+    <input type="submit" value="submit" onclick="notify() "></form>
+</body>
+</html>
